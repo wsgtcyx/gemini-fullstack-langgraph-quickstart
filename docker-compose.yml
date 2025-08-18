@@ -53,7 +53,7 @@ services:
       - traefik.http.routers.langgraph-api.rule=Host(`langgraph-api.bri-calculator.com`)
       - traefik.http.routers.langgraph-api.entrypoints=websecure
       - traefik.http.routers.langgraph-api.tls.certResolver=letsencrypt
-      - traefik.http.services.langgraph-api.loadbalancer.server.port=8123
+      - traefik.http.services.langgraph-api.loadbalancer.server.port=8000
 
 networks:
   dokploy-network:
