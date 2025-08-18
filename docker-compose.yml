@@ -10,6 +10,8 @@ services:
       interval: 5s
       timeout: 1s
       retries: 5
+    networks:
+      - dokploy-network
   langgraph-postgres:
     image: docker.io/postgres:16
     container_name: langgraph-postgres
@@ -27,6 +29,8 @@ services:
       timeout: 1s
       retries: 5
       interval: 5s
+    networks:
+      - dokploy-network
   langgraph-api:
     image: gemini-fullstack-langgraph
     container_name: langgraph-api
@@ -42,3 +46,14 @@ services:
       LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
       REDIS_URI: redis://langgraph-redis:6379
       POSTGRES_URI: postgres://postgres:postgres@langgraph-postgres:5432/postgres?sslmode=disable
+    networks:
+      - dokploy-network
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.langgraph-api.rule=Host(`langgraph-api.bri-calculator.com`)
+      - traefik.http.routers.langgraph-api.entrypoints=web
+      - traefik.http.services.langgraph-api.loadbalancer.server.port=8000
+
+networks:
+  dokploy-network:
+    external: true
