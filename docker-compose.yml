@@ -32,7 +32,11 @@ services:
     networks:
       - dokploy-network
   langgraph-api:
-    image: gemini-fullstack-langgraph
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: https://langgraph-api.bri-calculator.com
     container_name: langgraph-api
     env_file:
       - .env

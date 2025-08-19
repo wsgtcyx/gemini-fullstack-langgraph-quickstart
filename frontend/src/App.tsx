@@ -24,7 +24,7 @@ export default function App() {
   }>({
     apiUrl: import.meta.env.DEV
       ? "http://localhost:2024"
-      : "http://localhost:8123",
+      : import.meta.env.VITE_API_URL || "https://langgraph-api.bri-calculator.com",
     assistantId: "agent",
     messagesKey: "messages",
     onUpdateEvent: (event: any) => {
