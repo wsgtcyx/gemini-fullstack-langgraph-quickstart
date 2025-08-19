@@ -37,7 +37,7 @@ services:
     env_file:
       - .env
     ports:
-      - "8000:8000"
+      - "8123:8000"
     depends_on:
       langgraph-redis:
         condition: service_healthy
@@ -55,7 +55,7 @@ services:
       - traefik.http.routers.langgraph-api.rule=Host(`langgraph-api.bri-calculator.com`)
       - traefik.http.routers.langgraph-api.entrypoints=websecure
       - traefik.http.routers.langgraph-api.tls.certResolver=letsencrypt
-      - traefik.http.services.langgraph-api.loadbalancer.server.port=8000
+      - traefik.http.services.langgraph-api.loadbalancer.server.port=8123
 
 networks:
   dokploy-network:
