@@ -50,12 +50,12 @@ services:
       POSTGRES_URI: postgres://postgres:postgres@langgraph-postgres:5432/postgres?sslmode=disable
     networks:
       - dokploy-network
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.langgraph-api.rule=Host(`langgraph-api.bri-calculator.com`)
-      - traefik.http.routers.langgraph-api.entrypoints=websecure
-      - traefik.http.routers.langgraph-api.tls.certResolver=letsencrypt
-      - traefik.http.services.langgraph-api.loadbalancer.server.port=8123
+    # labels:
+    #   - traefik.enable=true
+    #   - traefik.http.routers.langgraph-api.rule=Host(`langgraph-api.bri-calculator.com`)
+    #   - traefik.http.routers.langgraph-api.entrypoints=websecure
+    #   - traefik.http.routers.langgraph-api.tls.certResolver=letsencrypt
+    #   - traefik.http.services.langgraph-api.loadbalancer.server.port=8123
 
 networks:
   dokploy-network:
