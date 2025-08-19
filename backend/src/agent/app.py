@@ -2,9 +2,33 @@
 import pathlib
 from fastapi import FastAPI, Response
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 # Define the FastAPI app
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, specify your frontend domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Add a simple health check endpoint
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy", "message": "Backend is running"}
+
+@app.get("/")
+async def root():
+    return {"message": "LangGraph API Server", "status": "running"}
+
+# Temporary test endpoint for assistants
+@app.get("/assistants")
+async def list_assistants():
+    return [{"assistant_id": "agent", "name": "Research Agent", "status": "available"}]
 
 
 def create_frontend_router(build_dir="../frontend/dist"):
