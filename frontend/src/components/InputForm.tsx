@@ -122,6 +122,12 @@ export const InputForm: React.FC<InputFormProps> = ({
                 >
                   High
                 </SelectItem>
+                <SelectItem
+                  value="ultra"
+                  className="hover:bg-neutral-600 focus:bg-neutral-600 cursor-pointer"
+                >
+                  Ultra
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>

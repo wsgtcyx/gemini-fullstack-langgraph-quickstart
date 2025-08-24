@@ -109,6 +109,7 @@ export default function App() {
       // low means max 1 loop and 1 query
       // medium means max 3 loops and 3 queries
       // high means max 10 loops and 5 queries
+      // ultra means max 15 loops and 8 queries
       let initial_search_query_count = 0;
       let max_research_loops = 0;
       switch (effort) {
@@ -123,6 +124,10 @@ export default function App() {
         case "high":
           initial_search_query_count = 5;
           max_research_loops = 10;
+          break;
+        case "ultra":
+          initial_search_query_count = 8;
+          max_research_loops = 15;
           break;
       }
 
