@@ -116,7 +116,7 @@ def web_research(state: WebSearchState, config: RunnableConfig) -> OverallState:
         model=configurable.query_generator_model,
         contents=formatted_prompt,
         config={
-            "tools": [{"google_search": {}}],
+            "tools": [{"url_context": {}},{"google_search": {}}],
             "temperature": 0,
         },
     )
