@@ -44,8 +44,8 @@ genai_client = Client(api_key=os.getenv("GEMINI_API_KEY"))
 def generate_query(state: OverallState, config: RunnableConfig) -> QueryGenerationState:
     """LangGraph node that generates search queries based on the User's question.
 
-    Uses Gemini 2.0 Flash to create an optimized search queries for web research based on
-    the User's question.
+    Uses Gemini 2.5 Flash to create an optimized search queries for web research based on
+    the User's question and the url context of the conversation.
 
     Args:
         state: Current graph state containing the User's question
