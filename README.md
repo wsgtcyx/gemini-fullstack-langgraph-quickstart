@@ -29,18 +29,62 @@ Follow these steps to get the application running locally for development and te
 
 -   Node.js and npm (or yarn/pnpm)
 -   Python 3.11+
--   **`GEMINI_API_KEY`**: The backend agent requires a Google Gemini API key.
-    1.  Navigate to the `backend/` directory.
-    2.  Create a file named `.env` by copying the `backend/.env.example` file.
-    3.  Open the `.env` file and add your Gemini API key: `GEMINI_API_KEY="YOUR_ACTUAL_API_KEY"`
+-   [uv](https://docs.astral.sh/uv/) - Fast Python package installer (will be installed automatically by setup script)
+-   **`GEMINI_API_KEY`**: The backend agent requires a Google Gemini API key. You can get one from [Google AI Studio](https://aistudio.google.com/app/apikey).
 
-**2. Install Dependencies:**
+**2. Quick Start (Recommended):**
+
+We provide convenient scripts to set up and run the backend:
+
+**Setup Backend (First Time):**
+
+```bash
+# Make scripts executable
+chmod +x setup-uv-env.sh run-backend.sh
+
+# Run setup script - this will:
+# - Install uv if needed
+# - Create a Python 3.11+ virtual environment
+# - Install all backend dependencies
+./setup-uv-env.sh
+
+# Add your Gemini API key
+nano backend/.env  # or use your preferred editor
+# Set: GEMINI_API_KEY="YOUR_ACTUAL_API_KEY"
+```
+
+**Run Backend:**
+
+```bash
+./run-backend.sh
+```
+
+The backend will be available at `http://localhost:2024` with LangGraph UI accessible at the same URL.
+
+**Install and Run Frontend:**
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend will be available at `http://localhost:5173`.
+
+**3. Alternative: Manual Setup**
+
+If you prefer to set up manually:
 
 **Backend:**
 
 ```bash
 cd backend
-pip install .
+uv venv --python 3.11          # Create virtual environment
+source .venv/bin/activate       # Activate environment
+uv pip install -e .             # Install dependencies
+cp .env.example .env            # Create .env file
+# Edit .env and add your GEMINI_API_KEY
+uv run langgraph dev            # Run backend server
 ```
 
 **Frontend:**
@@ -48,18 +92,18 @@ pip install .
 ```bash
 cd frontend
 npm install
+npm run dev
 ```
 
-**3. Run Development Servers:**
+**4. Run Both Servers Together:**
 
-**Backend & Frontend:**
+From the project root, you can use the Makefile:
 
 ```bash
 make dev
 ```
-This will run the backend and frontend development servers.    Open your browser and navigate to the frontend development server URL (e.g., `http://localhost:5173/app`).
 
-_Alternatively, you can run the backend and frontend development servers separately. For the backend, open a terminal in the `backend/` directory and run `langgraph dev`. The backend API will be available at `http://127.0.0.1:2024`. It will also open a browser window to the LangGraph UI. For the frontend, open a terminal in the `frontend/` directory and run `npm run dev`. The frontend will be available at `http://localhost:5173`._
+This will run both the backend and frontend development servers concurrently.
 
 ## How the Backend Agent Works (High-Level)
 
